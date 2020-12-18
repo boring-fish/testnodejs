@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #img_form{
+            /* display: block !important; */
+        }
+        .photo{
+            width:100px;
+            height:100px;
+        }
+    </style>
+</head>
+<body>
+        <img class="photo photo-img" src="">
+        <form id="img_form" action="" method="POST" enctype="multipart/form-data">
+            <input name="img" type="file" id="img-input"/>
+        </form>
+</body>
+</html>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+<script src="./jquery.form.js"></script>
+<!-- <script src="./app.js"></script> -->
+
+<script>
+    $("#img-input").click(
+        
+
+        
+   
+    function (e) {
+  // 图片更改后异步提交表单上传服务器，返回url
+  console.log(4)
+  var form = $("#img_form");
+  console.log(5)
+  domain='localhost:3000';
+  var options = {
+    // url: domain + '/upload/img', //上传文件的路径
+    url: domain , //上传文件的路径
+
+    type:'post',
+    success:function(data){
+        console.log('success'+data);
+      data = JSON.parse(data);
+      if(data.code == 0) {
+        imgUrl = data.data.url;
+      } else {
+      	alert('上传图片出错！');
+      }
+    },
+    fail:function(data){
+        console.log('error'+data);
+    }
+  };
+  console.log(3)
+//   form.onsubmit(options);
+  console.log(1)
+  form.ajaxSubmit(options);
+  console.log(2)
+ 
+//   // 在前端显示上传的图片
+//   console.log($('.photo').find('input')[0]);
+// //   console.log($('.photo').find('input')[0]);
+
+//   var file = $('.photo').find('input')[0].files[0];
+//   var reader = new FileReader();
+//   reader.onload = function(e){
+//   var imgFile = e.target.result;
+//     $('.photo-img').attr('src',imgFile);
+//     $('.photo-img').attr('style','display:block');
+//   }
+//   reader.readAsDataURL(file);
+    } )
+</script>
